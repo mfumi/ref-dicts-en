@@ -76,7 +76,8 @@ function! s:source.get_body(query)
   else
     return ''
   endif
-  let url = 'http://www.answers.com/topic/' . a:query
+  let str =  substitute(a:query, '+', '-', 'g')
+  let url = 'http://www.answers.com/topic/' . str
   call map(cmdline, 'substitute(v:val, "%s", url, "g")')
   if g:ref_answers_use_cache
     let expr = 'ref#system(' . string(cmdline) . ').stdout'
